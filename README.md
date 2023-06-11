@@ -1,17 +1,52 @@
-# Next 13 explore with GitHub Repository
+# Next.js 13 Crash Course Project
 
-### Advantages of RSC:
+This is a project from my [Next.js 13 Crash Course](https://youtu.be/Y6KDk5iyrYE). It uses the newer features such as:
 
-- Load faster - Don't have to wait for the JavaScript to load
-- Smaller client bundle size
-- SEO friendly
-- Access to resources the client can't access
-- Hide sensitive data from the client
-- More secure against XSS attacks
-- Improved developer experience
+- App directory
+- New routing system
+- Next Fonts
+- React Server Components
+- Data Fetching
+- Layouts
+- Metadata API
+- API Route Handlers
+- loading.js Page
+- and more
 
-### Just like with anything else, there are also disadvantages:
+<img src="./public/screen.png" width="500">
 
-- Not as interactive
-- No component state. We can not use the `useState` hook.
-- No component lifecycle methods. We can not use the `useEffect` hook.
+## Usage
+
+Install dependencies:
+
+```bash
+npm install
+# or
+yarn
+```
+
+Run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+Build the project:
+
+```bash
+npm run build
+# or
+yarn build
+```
+
+Run production build:
+
+```bash
+npm run start
+# or
+yarn start
+```

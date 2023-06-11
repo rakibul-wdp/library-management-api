@@ -1,8 +1,23 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
+import { v4 as uuidv4 } from 'uuid';
+import courses from './data.json';
 
 export async function GET(request) {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-  const data = await res.json();
+  return NextResponse.json(courses);
+}
 
-  return NextResponse.json(data);
+export async function POST(request) {
+  const { title, description, level, link } = await request.json();
+
+  const newCourse = {
+    id: uuidv4(),
+    title,
+    description,
+    level,
+    link,
+  };
+
+  courses.push(newCourse);
+
+  return NextResponse.json(courses);
 }

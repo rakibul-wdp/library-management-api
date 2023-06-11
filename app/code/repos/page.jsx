@@ -1,15 +1,17 @@
-import React from 'react';
 import Link from 'next/link';
-import { FaStar, FaCodeBranch, FaEye } from "react-icons/fa";
+import { FaStar, FaCodeBranch, FaEye } from 'react-icons/fa';
 
 async function fetchRepos() {
-  const response = await fetch("https://api.github.com/users/rakibul-wdp/repos", {
-    next: {
-      revalidate: 60,
+  const response = await fetch(
+    'https://api.github.com/users/bradtraversy/repos',
+    {
+      next: {
+        revalidate: 60,
+      },
     }
-  });
+  );
 
-  await new Promise((resolve) => setTimeout(resolve, 1000)); // wait 1 second for see loader
+  await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait 1 second
 
   const repos = await response.json();
   return repos;
@@ -27,7 +29,7 @@ const ReposPage = async () => {
             <Link href={`/code/repos/${repo.name}`}>
               <h3>{repo.name}</h3>
               <p>{repo.description}</p>
-              <div className="repo-details">
+              <div className='repo-details'>
                 <span>
                   <FaStar /> {repo.stargazers_count}
                 </span>
@@ -43,7 +45,6 @@ const ReposPage = async () => {
         ))}
       </ul>
     </div>
-  )
-}
-
+  );
+};
 export default ReposPage;
