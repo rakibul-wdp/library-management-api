@@ -1,4 +1,6 @@
 import Button from "@/app/components/Button";
+import thumb from "@/public/images/post.webp";
+import Image from "next/image";
 
 export default function Mission() {
   return (
@@ -10,6 +12,8 @@ export default function Mission() {
         pariatur aperiam, aspernatur nihil deserunt distinctio illo temporibus,
         inventore, omnis ab iste tempore incidunt non voluptate!
       </p>
+
+      <Image src={thumb} alt="" />
 
       <Button />
     </main>
