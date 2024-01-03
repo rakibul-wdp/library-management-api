@@ -3,7 +3,6 @@ import Link from "next/link";
 
 export default async function Posts() {
   const posts = await getAllPosts();
-  console.log(posts);
 
   return (
     <div className="mt-5">
