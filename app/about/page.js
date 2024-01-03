@@ -1,5 +1,5 @@
 export default function About() {
-  throw new Error("There was a error!");
+  // throw new Error("There was a error!");
 
   return (
     <main className="mt-5">
