@@ -1,4 +1,4 @@
-### Next Crash
+### Next Crash updated
 
 - loading component show spinner in root or any route directory
 - error component handle error in root or any route directory
