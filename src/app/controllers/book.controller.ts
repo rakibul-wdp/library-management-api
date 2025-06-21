@@ -37,3 +37,32 @@ export const createBook = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const getAllBooks = async (req: Request, res: Response) => {
+  try {
+    const {
+      filter,
+      sortBy = "createdAt",
+      sort = "desc",
+      limit = "10",
+    } = req.query;
+
+    const query = filter ? { genre: filter } : {};
+    const sortOption = { [sortBy as string]: sort === "desc" ? -1 : 1 };
+    const limitNum = parseInt(limit as string) || 10;
+
+    const books = await Book.find(query).sort(sortOption).limit(limitNum);
+
+    res.status(200).json({
+      success: true,
+      message: "Books retrieved successfully",
+      data: books,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error retrieving books",
+      success: false,
+      error,
+    });
+  }
+};
