@@ -66,3 +66,27 @@ export const getAllBooks = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const getBookById = async (req: Request, res: Response) => {
+  try {
+    const book = await Book.findById(req.params.bookId);
+    if (!book) {
+      return res.status(404).json({
+        message: "Book not found",
+        success: false,
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Book retrieved successfully",
+      data: book,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error retrieving book",
+      success: false,
+      error,
+    });
+  }
+};
