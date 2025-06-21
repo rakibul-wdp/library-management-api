@@ -48,7 +48,9 @@ export const getAllBooks = async (req: Request, res: Response) => {
     } = req.query;
 
     const query = filter ? { genre: filter } : {};
-    const sortOption = { [sortBy as string]: sort === "desc" ? -1 : 1 };
+    const sortOption: Record<string, 1 | -1> = {
+      [sortBy as string]: sort === "desc" ? -1 : 1,
+    };
     const limitNum = parseInt(limit as string) || 10;
 
     const books = await Book.find(query).sort(sortOption).limit(limitNum);
