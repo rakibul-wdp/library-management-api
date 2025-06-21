@@ -10,7 +10,7 @@ dotenv.config();
 
 async function main() {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect(process.env.MONGO_URI as string);
     console.log("Connected to MongoDB Using Mongoose!");
     server = app.listen(PORT, () => {
       console.log(`App is listening on port ${PORT}`);

@@ -1,4 +1,10 @@
-import express, { Application, NextFunction, Request, Response } from "express";
+import express, {
+  Application,
+  NextFunction,
+  Request,
+  RequestHandler,
+  Response,
+} from "express";
 import {
   createBook,
   getAllBooks,
@@ -17,11 +23,11 @@ app.use(express.json());
 
 app.post("/api/books", createBook);
 app.get("/api/books", getAllBooks);
-app.get("/api/books/:bookId", getBookById);
-app.put("/api/books/:bookId", updateBook);
-app.delete("/api/books/:bookId", deleteBook);
+app.get("/api/books/:bookId", getBookById as RequestHandler);
+app.put("/api/books/:bookId", updateBook as RequestHandler);
+app.delete("/api/books/:bookId", deleteBook as RequestHandler);
 
-app.post("/api/borrow", borrowBook);
+app.post("/api/borrow", borrowBook as RequestHandler);
 app.get("/api/borrow", getBorrowedBooksSummary);
 
 app.get("/", (req: Request, res: Response) => {
