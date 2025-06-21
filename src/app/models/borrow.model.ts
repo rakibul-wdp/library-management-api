@@ -1,5 +1,6 @@
 import { model, Schema } from "mongoose";
 import { IBorrow } from "../interfaces/borrow.interface";
+import { Book } from "./book.model";
 
 const borrowSchema = new Schema<IBorrow>(
   {
@@ -25,12 +26,11 @@ const borrowSchema = new Schema<IBorrow>(
 );
 
 borrowSchema.post("save", async function (doc) {
-  const Book = model("Book");
   const book = await Book.findById(doc.book);
   if (book) {
     book.copies -= doc.quantity;
     await book.save();
-    await Book.updateAvailability(doc.book);
+    await (Book as any).updateAvailability(doc.book);
   }
 });
 

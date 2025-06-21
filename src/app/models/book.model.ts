@@ -1,7 +1,11 @@
 import { model, Schema } from "mongoose";
-import { BookGenre, IBook, BookModel } from "../interfaces/book.interface";
+import {
+  BookGenre,
+  IBook,
+  BookModelStatic,
+} from "../interfaces/book.interface";
 
-const bookSchema = new Schema<IBook, BookModel>(
+const bookSchema = new Schema<IBook, BookModelStatic>(
   {
     title: {
       type: String,
@@ -67,4 +71,4 @@ bookSchema.pre("save", function (next) {
   next();
 });
 
-export const Book = model<IBook, BookModel>("Book", bookSchema);
+export const Book = model<IBook, BookModelStatic>("Book", bookSchema);

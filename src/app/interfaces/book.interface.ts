@@ -1,4 +1,4 @@
-import { Document } from "mongoose";
+import { Document, Model } from "mongoose";
 
 export type BookGenre =
   | "FICTION"
@@ -20,6 +20,6 @@ export interface IBook extends Document {
   updatedAt: Date;
 }
 
-export interface BookModel extends Document {
+export interface BookModelStatic extends Model<IBook> {
   updateAvailability(bookId: string): Promise<void>;
 }
