@@ -90,3 +90,30 @@ export const getBookById = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const updateBook = async (req: Request, res: Response) => {
+  try {
+    const book = await Book.findByIdAndUpdate(req.params.bookId, req.body, {
+      new: true,
+    });
+
+    if (!book) {
+      return res.status(404).json({
+        message: "Book not found",
+        success: false,
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Book updated successfully",
+      data: book,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "Error updating book",
+      success: false,
+      error,
+    });
+  }
+};
