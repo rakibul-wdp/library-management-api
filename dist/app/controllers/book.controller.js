@@ -54,12 +54,23 @@ const getAllBooks = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const sortOption = {
             [sortBy]: sort === "desc" ? -1 : 1,
         };
+        const page = parseInt(req.query.page) || 1;
         const limitNum = parseInt(limit) || 10;
-        const books = yield book_model_1.Book.find(query).sort(sortOption).limit(limitNum);
+        const skip = (page - 1) * limitNum;
+        const [books, total] = yield Promise.all([
+            book_model_1.Book.find(query).sort(sortOption).skip(skip).limit(limitNum),
+            book_model_1.Book.countDocuments(query),
+        ]);
         res.status(200).json({
             success: true,
             message: "Books retrieved successfully",
-            data: books,
+            data: {
+                books,
+                total,
+                page,
+                pages: Math.ceil(total / limitNum),
+                limit: limitNum,
+            },
         });
     }
     catch (error) {
