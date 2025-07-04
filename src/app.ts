@@ -16,10 +16,12 @@ import {
   borrowBook,
   getBorrowedBooksSummary,
 } from "./app/controllers/borrow.controller";
+import cors from "cors";
 
 const app: Application = express();
 
 app.use(express.json());
+app.use(cors())
 
 app.post("/api/books", createBook);
 app.get("/api/books", getAllBooks);

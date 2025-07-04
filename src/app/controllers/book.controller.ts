@@ -51,14 +51,25 @@ export const getAllBooks = async (req: Request, res: Response) => {
     const sortOption: Record<string, 1 | -1> = {
       [sortBy as string]: sort === "desc" ? -1 : 1,
     };
+    const page = parseInt(req.query.page as string) || 1;
     const limitNum = parseInt(limit as string) || 10;
+    const skip = (page - 1) * limitNum;
 
-    const books = await Book.find(query).sort(sortOption).limit(limitNum);
+    const [books, total] = await Promise.all([
+      Book.find(query).sort(sortOption).skip(skip).limit(limitNum),
+      Book.countDocuments(query),
+    ]);
 
     res.status(200).json({
       success: true,
       message: "Books retrieved successfully",
-      data: books,
+      data: {
+        books,
+        total,
+        page,
+        pages: Math.ceil(total / limitNum),
+        limit: limitNum,
+      },
     });
   } catch (error) {
     res.status(500).json({
